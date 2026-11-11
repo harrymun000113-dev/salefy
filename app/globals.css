@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* 색상 토큰: 라이트 / 다크 */
+:root {
+  --bg: #ffffff;
+  --bg-subtle: #fafafa;
+  --bg-muted: #f2f2f2;
+  --fg: #171717;
+  --fg-muted: #666666;
+  --fg-subtle: #8f8f8f;
+  --border: #ebebeb;
+  --border-strong: #d4d4d4;
+  --accent: #171717;
+  --accent-fg: #ffffff;
+  --blue: #0068d6;    --blue-bg: #ebf5ff;
+  --red: #d8262d;     --red-bg: #ffebeb;
+  --amber: #a35200;   --amber-bg: #fff4d6;
+  --green: #297a3a;   --green-bg: #e9f9ec;
+  --purple: #7d3ac1;  --purple-bg: #f7eeff;
+}
+.dark {
+  --bg: #0a0a0a;
+  --bg-subtle: #111111;
+  --bg-muted: #1a1a1a;
+  --fg: #ededed;
+  --fg-muted: #a1a1a1;
+  --fg-subtle: #737373;
+  --border: #242424;
+  --border-strong: #3a3a3a;
+  --accent: #ededed;
+  --accent-fg: #0a0a0a;
+  --blue: #52a8ff;    --blue-bg: #0a1d33;
+  --red: #ff6166;     --red-bg: #330b0d;
+  --amber: #ffb224;   --amber-bg: #2e1d02;
+  --green: #62c073;   --green-bg: #0b2212;
+  --purple: #bf7af0;  --purple-bg: #221030;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-subtle: var(--bg-subtle);
+  --color-bg-muted: var(--bg-muted);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-subtle: var(--fg-subtle);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-blue: var(--blue);     --color-blue-bg: var(--blue-bg);
+  --color-red: var(--red);       --color-red-bg: var(--red-bg);
+  --color-amber: var(--amber);   --color-amber-bg: var(--amber-bg);
+  --color-green: var(--green);   --color-green-bg: var(--green-bg);
+  --color-purple: var(--purple); --color-purple-bg: var(--purple-bg);
+  --font-sans: var(--font-geist-sans), "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+html { color-scheme: light; }
+html.dark { color-scheme: dark; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  -webkit-font-smoothing: antialiased;
+  word-break: keep-all;
+}
+
+::selection { background: var(--blue-bg); color: var(--fg); }
+
+/* 홈 히어로의 은은한 격자 배경 */
+.grid-bg {
+  background-image:
+    linear-gradient(to right, var(--border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 40%, transparent 100%);
+}
+
+@keyframes shimmer { 100% { transform: translateX(100%); } }
+.skeleton { position: relative; overflow: hidden; background: var(--bg-muted); border-radius: 6px; }
+.skeleton::after {
+  content: ""; position: absolute; inset: 0; transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--bg) 60%, transparent), transparent);
+  animation: shimmer 1.4s infinite;
+}
